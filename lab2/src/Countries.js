@@ -1,5 +1,6 @@
 import React from 'react';
 import Select from 'react-select'
+import Flag from './Flag';
 
 export default class Contries extends React.Component {
     constructor(props) {
@@ -7,8 +8,10 @@ export default class Contries extends React.Component {
       this.state = {
         error: null,
         isLoaded: false,
-        countries: []
+        countries: [],
+        currentCountry: null
       };
+      this.handleChange = this.handleChange.bind(this);
     }
   
     componentDidMount() {
@@ -35,7 +38,12 @@ export default class Contries extends React.Component {
           }
         )
     }
+    
+    handleChange(country) {
+        this.setState({currentCountry: country});
+      }
 
+    
     render() {
       const { error, isLoaded, countries } = this.state;
       if (error) {
@@ -45,10 +53,17 @@ export default class Contries extends React.Component {
       } else {
         return (
             <div>
-                <Select options={countries}/>
+                <h2>
+                    Select country
+                </h2>
+                <Select options={countries}
+                value={this.state.currentCountry} onChange={this.handleChange}
+                />
+                <h2>
+                    Country flag
+                </h2>
+                {this.state.currentCountry && <Flag country={this.state.currentCountry}/>}
             </div>
-            
-          
         );
       }
     }
