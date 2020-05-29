@@ -9,7 +9,7 @@ export default class Contries extends React.Component {
         error: null,
         isLoaded: false,
         countries: [],
-        currentCountry: null
+        currentCountry: {label: 'Russian Federation', value: 'RU'}
       };
       this.handleChange = this.handleChange.bind(this);
     }
@@ -48,8 +48,6 @@ export default class Contries extends React.Component {
       const { error, isLoaded, countries } = this.state;
       if (error) {
         return <div>Ошибка: {error.message}</div>;
-      } else if (!isLoaded) {
-        return <div>Загрузка...</div>;
       } else {
         return (
             <div>
