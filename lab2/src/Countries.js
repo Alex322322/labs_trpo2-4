@@ -1,4 +1,6 @@
 import React from 'react';
+import Select from 'react-select'
+
 export default class Contries extends React.Component {
     constructor(props) {
       super(props);
@@ -14,9 +16,15 @@ export default class Contries extends React.Component {
         .then(res => res.json())
         .then(
           (result) => {
+            const listItem = result.map(function (country) {
+                return {
+                     value: country.alpha2Code,
+                     label: country.name
+                 };
+             });
             this.setState({
               isLoaded: true,
-              countries: result
+              countries: listItem
             });
           },
           (error) => {
@@ -27,7 +35,7 @@ export default class Contries extends React.Component {
           }
         )
     }
-  
+
     render() {
       const { error, isLoaded, countries } = this.state;
       if (error) {
@@ -36,13 +44,11 @@ export default class Contries extends React.Component {
         return <div>Загрузка...</div>;
       } else {
         return (
-          <ul>
-            {countries.map(countries => (
-              <li key={countries.name}>
-                {countries.name} {countries.alpha2Code}
-              </li>
-            ))}
-          </ul>
+            <div>
+                <Select options={countries}/>
+            </div>
+            
+          
         );
       }
     }
