@@ -8,7 +8,7 @@ export default class Flag extends React.Component {
  
     render() {
         return (
-                <img src= {`https://www.countryflags.io/${this.props.country.value}/shiny/64.png`} />
+                <img data-testid="flag-img" src= {`https://www.countryflags.io/${this.props.country.value}/shiny/64.png`} />
         );
     }
   }
