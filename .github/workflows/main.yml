@@ -6,6 +6,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    working-directory: lab2
 
     strategy:
       matrix:
